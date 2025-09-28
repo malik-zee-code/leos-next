@@ -1,10 +1,10 @@
 // Tremor Raw Input [v1.0.0]
 
-import { RiSearchLine } from "@remixicon/react"
-import * as React from "react"
-import { tv, type VariantProps } from "tailwind-variants"
+import { RiSearchLine } from "@remixicon/react";
+import * as React from "react";
+import { tv, type VariantProps } from "tailwind-variants";
 
-import { cx, focusInput, hasErrorInput } from "@/lib/utils"
+import { cx, focusInput, hasErrorInput } from "@/lib/utils";
 
 const inputStyles = tv({
   base: [
@@ -17,7 +17,7 @@ const inputStyles = tv({
     // placeholder color
     "placeholder-gray-400 dark:placeholder-gray-500",
     // background color
-    "bg-gray-100 dark:bg-gray-950",
+    "bg-gray-100 dark:bg-gray-800",
     // disabled
     "disabled:border-gray-300 disabled:bg-gray-100 disabled:text-gray-400",
     "disabled:dark:border-gray-700 disabled:dark:bg-gray-800 disabled:dark:text-gray-500",
@@ -37,36 +37,25 @@ const inputStyles = tv({
       true: "[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none",
     },
   },
-})
+});
 
 interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
     VariantProps<typeof inputStyles> {
-  inputClassName?: string
+  inputClassName?: string;
 }
 
 const Searchbar = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    {
-      className,
-      inputClassName,
-      hasError,
-      enableStepper,
-      type = "search",
-      ...props
-    }: InputProps,
-    forwardedRef,
+    { className, inputClassName, hasError, enableStepper, type = "search", ...props }: InputProps,
+    forwardedRef
   ) => {
     return (
       <div className={cx("relative w-full", className)}>
         <input
           ref={forwardedRef}
           type={type}
-          className={cx(
-            inputStyles({ hasError, enableStepper }),
-            "pl-8",
-            inputClassName,
-          )}
+          className={cx(inputStyles({ hasError, enableStepper }), "pl-8", inputClassName)}
           {...props}
         />
         <div
@@ -74,19 +63,16 @@ const Searchbar = React.forwardRef<HTMLInputElement, InputProps>(
             // base
             "pointer-events-none absolute bottom-0 left-2 flex h-full items-center justify-center",
             // text color
-            "text-gray-400 dark:text-gray-600",
+            "text-gray-400 dark:text-gray-400"
           )}
         >
-          <RiSearchLine
-            className="size-[1.125rem] shrink-0"
-            aria-hidden="true"
-          />
+          <RiSearchLine className="size-[1.125rem] shrink-0" aria-hidden="true" />
         </div>
       </div>
-    )
-  },
-)
+    );
+  }
+);
 
-Searchbar.displayName = "Searchbar"
+Searchbar.displayName = "Searchbar";
 
-export { Searchbar }
+export { Searchbar };

@@ -1,38 +1,49 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/Button"
-import { Searchbar } from "@/components/Searchbar"
-import { conditions, regions, statuses } from "@/data/data"
-import { formatters } from "@/lib/utils"
-import { RiDownloadLine } from "@remixicon/react"
-import { Table } from "@tanstack/react-table"
-import { useState } from "react"
-import { useDebouncedCallback } from "use-debounce"
-import { DataTableFilter } from "./DataTableFilter"
-import { ViewOptions } from "./DataTableViewOptions"
+import { Button } from "@/components/Button";
+import { Searchbar } from "@/components/Searchbar";
+import { conditions, regions, statuses } from "@/data/data";
+import { formatters } from "@/lib/utils";
+import { RiDownloadLine } from "@remixicon/react";
+import { Table } from "@tanstack/react-table";
+import { useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
+import { DataTableFilter } from "./DataTableFilter";
+import { ViewOptions } from "./DataTableViewOptions";
 
 interface DataTableToolbarProps<TData> {
-  table: Table<TData>
+  table: Table<TData>;
 }
 
 export function Filterbar<TData>({ table }: DataTableToolbarProps<TData>) {
-  const isFiltered = table.getState().columnFilters.length > 0
-  const [searchTerm, setSearchTerm] = useState<string>("")
+  const isFiltered = table.getState().columnFilters.length > 0;
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  // Get the first text-based column for search
+  const searchableColumn = table
+    .getAllColumns()
+    .find(
+      (column) =>
+        column.getCanFilter() && column.columnDef.meta?.displayName && !column.id.includes("select")
+    );
 
   const debouncedSetFilterValue = useDebouncedCallback((value) => {
-    table.getColumn("owner")?.setFilterValue(value)
-  }, 300)
+    if (searchableColumn) {
+      searchableColumn.setFilterValue(value);
+    }
+  }, 300);
 
-  const handleSearchChange = (event: any) => {
-    const value = event.target.value
-    setSearchTerm(value)
-    debouncedSetFilterValue(value)
-  }
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    debouncedSetFilterValue(value);
+  };
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-x-6">
       <div className="flex w-full flex-col gap-2 sm:w-fit sm:flex-row sm:items-center">
-        {table.getColumn("status")?.getIsVisible() && (
+        {/* Only show filters for columns that exist and are visible */}
+        {/* {table.getColumn("status")?.getIsVisible() && (
           <DataTableFilter
             column={table.getColumn("status")}
             title="Status"
@@ -54,13 +65,13 @@ export function Filterbar<TData>({ table }: DataTableToolbarProps<TData>) {
             title="Costs"
             type="number"
             options={conditions}
-            formatter={formatters.currency}
+            formatter={formatters.currency as (value: unknown) => string}
           />
-        )}
-        {table.getColumn("owner")?.getIsVisible() && (
+        )} */}
+        {searchableColumn?.getIsVisible() && (
           <Searchbar
             type="search"
-            placeholder="Search by owner..."
+            placeholder={`Search by ${searchableColumn.columnDef.meta?.displayName || "column"}...`}
             value={searchTerm}
             onChange={handleSearchChange}
             className="w-full sm:max-w-[250px] sm:[&>input]:h-[30px]"
@@ -87,5 +98,5 @@ export function Filterbar<TData>({ table }: DataTableToolbarProps<TData>) {
         <ViewOptions table={table} />
       </div>
     </div>
-  )
+  );
 }

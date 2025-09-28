@@ -1,76 +1,73 @@
-import { RiMoonLine, RiSunLine } from "@remixicon/react"
-import Image from "next/image"
-import { useEffect, useState } from "react"
+"use client";
 
-import backgroundImage from "@/images/background-auth.jpg"
-import { Button } from "./Button"
+import { RiMoonLine, RiSunLine } from "@remixicon/react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useLocale } from "next-intl";
+import { Button } from "./Button";
+import { AuthCarousel } from "./AuthCarousel";
 
 interface AuthLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function AuthLayout({ children }: AuthLayoutProps) {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(false);
+  const locale = useLocale();
 
   useEffect(() => {
     // Check localStorage and system preference
-    const savedTheme = localStorage.getItem("theme")
-    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
+    const savedTheme = localStorage.getItem("theme");
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
-      : "light"
-    const initialTheme = savedTheme || systemTheme
+      : "light";
+    const initialTheme = savedTheme || systemTheme;
 
-    setIsDark(initialTheme === "dark")
+    setIsDark(initialTheme === "dark");
     if (initialTheme === "dark") {
-      document.documentElement.classList.add("dark")
+      document.documentElement.classList.add("dark");
     }
-  }, [])
+  }, []);
 
   const toggleTheme = () => {
-    const newIsDark = !isDark
-    setIsDark(newIsDark)
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
 
     if (newIsDark) {
-      document.documentElement.classList.add("dark")
-      localStorage.setItem("theme", "dark")
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.classList.remove("dark")
-      localStorage.setItem("theme", "light")
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
-  }
+  };
 
   return (
-    <>
-      <div className="relative flex min-h-full justify-center bg-white text-gray-900 md:px-12 lg:px-0 dark:bg-gray-950 dark:text-gray-100">
-        {/* Theme Switcher */}
-        <Button
-          onClick={toggleTheme}
-          variant="light"
-          className="absolute left-4 top-4 z-20"
-          aria-label="Toggle theme"
-        >
-          {isDark ? (
-            <RiSunLine className="h-5 w-5" />
-          ) : (
-            <RiMoonLine className="h-5 w-5" />
-          )}
-        </Button>
-
-        <div className="relative z-10 flex flex-1 flex-col bg-white px-4 py-10 shadow-2xl sm:justify-center md:flex-none md:px-28 dark:bg-gray-950">
-          <div className="mx-auto w-full max-w-md sm:px-4 md:w-96 md:max-w-sm md:px-0">
-            {children}
-          </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Main Content */}
+      <div className="flex min-h-screen">
+        {/* Left Side - Carousel */}
+        <div className="hidden lg:flex lg:w-2/3 relative p-10">
+          <AuthCarousel />
         </div>
-        <div className="hidden sm:contents lg:relative lg:block lg:flex-1">
-          <Image
-            className="absolute inset-0 h-full w-full object-cover"
-            src={backgroundImage}
-            alt=""
-            unoptimized
-          />
+
+        {/* Right Side - Form */}
+        <div className="flex w-full lg:w-1/3 flex-col justify-center bg-gray-50 dark:bg-gray-800 px-8 py-12 relative">
+          <div className="absolute top-0 left-0 right-0 z-50 px-4 py-3">
+            <div className="flex items-center justify-between">
+              <Button
+                onClick={toggleTheme}
+                variant="light"
+                className="p-2"
+                aria-label="Toggle theme"
+              >
+                {isDark ? <RiSunLine className="h-4 w-4" /> : <RiMoonLine className="h-4 w-4" />}
+              </Button>
+            </div>
+          </div>
+          {children}
         </div>
       </div>
-    </>
-  )
+    </div>
+  );
 }

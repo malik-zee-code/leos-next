@@ -1,6 +1,15 @@
-"use client"
+"use client";
 
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 export default function HrBar() {
   const data = [
@@ -12,21 +21,21 @@ export default function HrBar() {
     { month: "SEP", Joiners: 9, Leavers: 5 },
     { month: "OCT", Joiners: 5, Leavers: 2 },
     { month: "DEC", Joiners: 6, Leavers: 4 },
-  ]
+  ];
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="4" stroke="#f0f0f0" />
-        <XAxis dataKey="month" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Joiners" fill="#E354D4" name="Joiners" />
-        <Bar dataKey="Leavers" fill="#2563EB" name="Leavers" />
-      </BarChart>
-    </ResponsiveContainer>
-  )
+    <div id="hr-bar-chart">
+      <ResponsiveContainer width="100%" height={300} className={"text-xs"}>
+        <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="4" stroke="#f0f0f0" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="Joiners" fill="#E354D4" name="Joiners" />
+          <Bar dataKey="Leavers" fill="#2563EB" name="Leavers" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
 }
-
-

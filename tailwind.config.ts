@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   darkMode: "class",
@@ -44,22 +44,16 @@ const config: Config = {
       },
       animation: {
         hide: "hide 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-        slideDownAndFade:
-          "slideDownAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-        slideLeftAndFade:
-          "slideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideDownAndFade: "slideDownAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideLeftAndFade: "slideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
         slideUpAndFade: "slideUpAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-        slideRightAndFade:
-          "slideRightAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-        drawerSlideLeftAndFade:
-          "drawerSlideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-        dialogOverlayShow:
-          "dialogOverlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-        dialogContentShow:
-          "dialogContentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        slideRightAndFade: "slideRightAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        drawerSlideLeftAndFade: "drawerSlideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        dialogOverlayShow: "dialogOverlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+        dialogContentShow: "dialogContentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
-}
-export default config
+  plugins: [],
+};
+export default config;
