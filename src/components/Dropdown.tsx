@@ -60,7 +60,9 @@ const DropdownMenuSubMenuContent = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitives.SubContent>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitives.SubContent>
 >(({ className, collisionPadding = 8, ...props }, forwardedRef) => (
-  <DropdownMenuPrimitives.Portal container={document.body}>
+  <DropdownMenuPrimitives.Portal
+    container={typeof document !== "undefined" ? document.body : undefined}
+  >
     <DropdownMenuPrimitives.SubContent
       ref={forwardedRef}
       collisionPadding={collisionPadding}
@@ -98,7 +100,9 @@ const DropdownMenuContent = React.forwardRef<
     { className, sideOffset = 8, collisionPadding = 8, align = "center", loop = true, ...props },
     forwardedRef
   ) => (
-    <DropdownMenuPrimitives.Portal container={document.body}>
+    <DropdownMenuPrimitives.Portal
+      container={typeof document !== "undefined" ? document.body : undefined}
+    >
       <DropdownMenuPrimitives.Content
         ref={forwardedRef}
         className={cx(

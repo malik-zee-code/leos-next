@@ -12,6 +12,8 @@ interface MobileSidebarProps {
 export function MobileSidebar({ isOpen, onClose }: MobileSidebarProps) {
   // Close sidebar when clicking outside or pressing Escape
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();

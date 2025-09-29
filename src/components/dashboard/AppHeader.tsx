@@ -110,9 +110,9 @@ export default function AppHeader() {
           <DropdownMenuTrigger asChild>
             <Button
               variant="secondary"
-              className="h-10 w-10 rounded-full transition-all duration-200 hover:scale-105 hover:shadow-md"
+              className="h-10 w-10 p-1 rounded-full transition-all duration-200 hover:scale-105 hover:shadow-md"
             >
-              <RiGlobalLine className="h-5 w-5" />
+              <RiGlobalLine className="h-5 w-10" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56" sideOffset={8}>
@@ -146,7 +146,7 @@ export default function AppHeader() {
         {/* Fullscreen Icon */}
         <Button
           variant="secondary"
-          className="h-10 w-10 rounded-full transition-all duration-200 hover:scale-105 hover:shadow-md"
+          className="h-10 w-10 p-1 rounded-full transition-all duration-200 hover:scale-105 hover:shadow-md"
         >
           <RiFullscreenLine className="h-5 w-5" />
         </Button>
@@ -154,7 +154,7 @@ export default function AppHeader() {
         {/* Bell/Notifications Icon */}
         <Button
           variant="secondary"
-          className="h-10 w-10 rounded-full relative transition-all duration-200 hover:scale-105 hover:shadow-md"
+          className="h-10 w-10  p-1 rounded-full relative transition-all duration-200 hover:scale-105 hover:shadow-md"
         >
           <RiNotificationLine className="h-5 w-5" />
           {/* Notification Badge */}

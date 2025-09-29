@@ -15,6 +15,8 @@ export default function ChartDownload({ chartId, chartTitle, data }: ChartDownlo
   const [isOpen, setIsOpen] = useState(false);
 
   const downloadChart = async (format: "png" | "svg" | "csv") => {
+    if (typeof window === "undefined") return;
+
     if (format === "csv" && data) {
       // Download CSV
       const csvContent = convertToCSV(data);

@@ -5,12 +5,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   console.log("DashboardLayout");
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white">
       <AppHeader />
-      <div className="flex">
+      <div className="pt-16 flex">
         <AppSidebar />
-        <main className="w-full pt-16 min-w-0">
-          <div className="p-4 max-w-full overflow-x-hidden">{children}</div>
+        <main className="flex-1 min-w-0 overflow-x-hidden lg:ml-64 ">
+          <div className="p-4 max-w-full">{children}</div>
         </main>
       </div>
     </div>

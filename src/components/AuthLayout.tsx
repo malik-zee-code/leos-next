@@ -2,8 +2,6 @@
 
 import { RiMoonLine, RiSunLine } from "@remixicon/react";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useLocale } from "next-intl";
 import { Button } from "./Button";
 import { AuthCarousel } from "./AuthCarousel";
 
@@ -13,10 +11,11 @@ interface AuthLayoutProps {
 
 export function AuthLayout({ children }: AuthLayoutProps) {
   const [isDark, setIsDark] = useState(false);
-  const locale = useLocale();
 
   useEffect(() => {
     // Check localStorage and system preference
+    if (typeof window === "undefined") return;
+
     const savedTheme = localStorage.getItem("theme");
     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
@@ -30,6 +29,8 @@ export function AuthLayout({ children }: AuthLayoutProps) {
   }, []);
 
   const toggleTheme = () => {
+    if (typeof window === "undefined") return;
+
     const newIsDark = !isDark;
     setIsDark(newIsDark);
 

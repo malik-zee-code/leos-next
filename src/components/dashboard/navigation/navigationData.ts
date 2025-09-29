@@ -39,7 +39,7 @@ export const navigationData: NavigationSection[] = [
     titleKey: "sidebar.main",
     items: [
       {
-        href: "/dashboard",
+        href: "dashboard",
         icon: RiDashboardLine,
         iconSize: "md",
         labelKey: "sidebar.dashboard",

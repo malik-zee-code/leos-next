@@ -15,7 +15,7 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <Button variant="secondary" size="sm" className="h-10 w-10 rounded-full">
+      <Button variant="secondary" size="sm" className="h-10 w-10 rounded-full p-1">
         <RiSunLine className="h-5 w-5" />
       </Button>
     );
@@ -31,7 +31,7 @@ export function ThemeToggle() {
       }}
       variant="secondary"
       size="sm"
-      className="h-10 w-10 rounded-full"
+      className="h-10 w-10 rounded-full p-1"
       title={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
     >
       {theme === "dark" ? <RiSunLine className="h-5 w-5" /> : <RiMoonLine className="h-5 w-5" />}
